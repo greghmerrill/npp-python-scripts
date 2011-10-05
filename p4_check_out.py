@@ -2,7 +2,7 @@
 # Iterates all p4 clients on the current host to find the one which is the likely parent of the current file.
 
 from scriptlib import *
-import os, re
+import os, re, stat
 
 class P4Client:
   def __init__(self, clientspec):
@@ -52,3 +52,7 @@ else:
     console.write('\nThis file is not yet in p4, adding ...')
     p4out = subproc(['p4', '-c', closest_match.name, 'add', filepath])
     console.write('\n' + p4out)
+  else:
+    notepad.menuCommand(MENUCOMMAND.EDIT_CLEARREADONLY)
+    os.chmod(filepath, stat.S_IWRITE)
+    editor.setReadOnly(False)
