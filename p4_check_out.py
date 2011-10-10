@@ -38,7 +38,7 @@ console.write('\nFinding parent workspace for ' + filepath)
 
 closest_match = None
 for client in P4Client.get_local_clients():
-  if filepath.find(client.root) > -1 and ((not closest_match) or len(client.root) > len(closest_match.root)):
+  if filepath.upper().find(client.root.upper()) > -1 and ((not closest_match) or len(client.root) > len(closest_match.root)):
     closest_match = client
 
 if not closest_match:
