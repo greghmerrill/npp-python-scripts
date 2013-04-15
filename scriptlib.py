@@ -2,7 +2,8 @@ import re, subprocess
 from Npp import *
 
 def remove_blank_lines(txt):
-  return re.compile('(^\r?\n)|(\r?\n$)', re.MULTILINE).sub('', txt)
+  new_txt = re.sub('\n[\s\r\n]*\r?\n', '\n', txt)
+  return re.sub('^\s*\n', '', new_txt)
 
 def quote_for_sql(txt):
   return "'" + re.sub('\'', '\'\'', txt) + "'"
