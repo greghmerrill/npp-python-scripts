@@ -1,4 +1,4 @@
-import re, subprocess
+import re, subprocess, _subprocess
 from Npp import *
 
 def remove_blank_lines(txt):
@@ -22,7 +22,7 @@ def get_current_view_files():
 def subproc(cmd_line):
   # Prevent windows from creating a console window for this command
   startupinfo = subprocess.STARTUPINFO()
-  startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
+  startupinfo.dwFlags |= _subprocess.STARTF_USESHOWWINDOW
   process = subprocess.Popen(cmd_line, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, startupinfo=startupinfo)
   out = process.communicate()[0]
   if process.returncode != 0:
