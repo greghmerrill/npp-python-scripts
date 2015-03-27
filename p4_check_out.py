@@ -7,7 +7,8 @@ import os, re, stat
 class P4Client:
   def __init__(self, clientspec):
     self.name = re.search(r'^Client:\s+(.*)', clientspec, re.MULTILINE).group(1).strip()
-    self.host = re.search(r'^Host:\s+(.*)', clientspec, re.MULTILINE).group(1).strip()
+    hostmatch = re.search(r'^Host:\s+(.*)', clientspec, re.MULTILINE)
+    self.host = hostmatch.group(1).strip() if hostmatch else ''
     self.root = os.path.abspath(re.search(r'^Root:\s+(.*)', clientspec, re.MULTILINE).group(1).strip())
 
   def __str__(self):
