@@ -22,7 +22,7 @@ class P4Client:
 
     p4out = subproc(['p4', 'clients', '-u', user_name])
     matches = re.findall('Client [^ ]+', p4out)
-    client_names = [re.sub('Client ', '', match) for match in matches]
+    client_names = sorted([re.sub('Client ', '', match) for match in matches], key=len, reverse=True)
 
     local_clients = []
     for client_name in client_names:
